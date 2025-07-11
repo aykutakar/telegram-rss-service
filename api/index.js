@@ -1,5 +1,5 @@
 import { parseTelegramChannel } from './lib/parser.js';
-import { generateRSS } from './lib/rssGenerator';
+import { generateRSS } from './lib/rssGenerator.js';
 import { storeWebhook, triggerWebhooks } from './lib/webhooks.js';
 import { combineFeeds } from './lib/feedCombiner.js';
 import kv from '@vercel/kv';
