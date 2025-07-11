@@ -1,4 +1,4 @@
-import { parseTelegramChannel } from './lib/parser.js';
+import { parseTelegramChannel } from './parser.js';
 import kv from '@vercel/kv';
 
 export const getChannelData = async (channel) => {
