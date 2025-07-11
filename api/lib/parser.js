@@ -1,4 +1,4 @@
-import cheerio from 'cheerio';
+import { load } from 'cheerio';
 import fetch from 'node-fetch';
 
 export const parseTelegramChannel = async (channel) => {
@@ -6,7 +6,7 @@ export const parseTelegramChannel = async (channel) => {
   const response = await fetch(url);
   const html = await response.text();
   
-  const $ = cheerio.load(html);
+  const $ = load(html);
   const messages = [];
 
   $('.tgme_widget_message').each((i, el) => {
