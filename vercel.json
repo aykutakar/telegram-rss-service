@@ -12,10 +12,5 @@
       "dest": "api/index.js",
       "methods": ["GET", "POST"]
     }
-  ],
-  "env": {
-    "KV_REST_API_URL": "https://sweeping-panda-50150.upstash.io",
-    "KV_REST_API_TOKEN": "AcPmAAIjcDExYjczM2E4ZGI3Yzg0MzI4YTAxYTY2MDg0NjhjMzQ2OXAxMA",
-    "WEBHOOK_SECRET": "[S|1/7,m@K8=AHlf1=~%pw>^{JrN6&"
-  }
+  ]
 }
