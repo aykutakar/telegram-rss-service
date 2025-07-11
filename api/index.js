@@ -7,6 +7,17 @@ import kv from '@vercel/kv';
 const CACHE_TTL = 300; // 5 minutes
 
 export default async (req, res) => {
+  // Add CORS headers
+  res.setHeader('Access-Control-Allow-Origin', '*'); // Allow all origins; replace '*' with your domain for more security
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Handle preflight OPTIONS request
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
   // Handle webhook registration
   if (req.method === 'POST' && req.query.webhook) {
     const { channel, url, secret } = req.body;
