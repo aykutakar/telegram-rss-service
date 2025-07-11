@@ -1,4 +1,4 @@
-import { parseTelegramChannel } from './parser';
+import { parseTelegramChannel } from './lib/parser.js';
 import kv from '@vercel/kv';
 
 export const getChannelData = async (channel) => {
@@ -14,15 +14,17 @@ export const getChannelData = async (channel) => {
 
 export const combineFeeds = async (channels) => {
   const results = await Promise.all(
-    channels.map(channel => getChannelData(channel).catch(e => 
-      ({ channel, error: e.message }))
+    channels
+      .map(channel =>
+        getChannelData(channel).catch(e => ({ channel, error: e.message }))
+      )
   );
-  
+
   const successfulFeeds = results.filter(r => !r.error);
   const failedChannels = results.filter(r => r.error).map(r => r.channel);
   
   // Combine messages from all channels
-  const allMessages = successfulFeeds.flatMap(feed => 
+  const allMessages = successfulFeeds.flatMap(feed =>
     feed.messages.map(msg => ({
       ...msg,
       channel: feed.channel,
@@ -43,9 +45,8 @@ export const combineFeeds = async (channels) => {
       messageCount: f.messages.length
     })),
     messages: allMessages,
-    errors: failedChannels.length ? {
-      count: failedChannels.length,
-      channels: failedChannels
-    } : null
+    errors: failedChannels.length
+      ? { count: failedChannels.length, channels: failedChannels }
+      : null
   };
 };
