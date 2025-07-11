@@ -1,7 +1,7 @@
-import { parseTelegramChannel } from './lib/parser';
+import { parseTelegramChannel } from './lib/parser.js';
 import { generateRSS } from './lib/rssGenerator';
-import { storeWebhook, triggerWebhooks } from './lib/webhooks';
-import { combineFeeds } from './lib/feedCombiner';
+import { storeWebhook, triggerWebhooks } from './lib/webhooks.js';
+import { combineFeeds } from './lib/feedCombiner.js';
 import kv from '@vercel/kv';
 
 const CACHE_TTL = 300; // 5 minutes
